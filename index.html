@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+
+  <!-- styles -->
+    <link href="../bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet"/>
+    <link href="../css/style.css" rel="stylesheet" />
+</head>
+<body ng-controller="mainController">
+
+  <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header" style="text-align:center;">
+                Concentrate on Cars
+                </br><span>Turns: {{turns}}</span>          
+                <span style="margin-left:4em;"> Matches: {{matches}}/18</span>
+            </h1>
+            
+        </div>
+    </div>
+    <div class="row" style="text-align:center;">
+        <div class="col-xs-4 col-md-2" ng-repeat="tile in tiles" >
+            <div class="panel-body pointer" style="padding:5px;">
+                <a ng-click="selection(tile)">
+                    <img src={{tile.img[0]}} class="img-responsive centered" style="height:6em; width:6em;">
+                </a>
+            </div>
+        </div>
+    </div>
+
+  <!-- scripts -->
+    <script src="../bower_components/jquery/dist/jquery.js"></script>
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="../js/app.js"></script>
+</body>
+</html>
