@@ -155,17 +155,7 @@
         for (var i = 0; i < tileSource.length; i++) {
             tileSource[i].index = i;
             tileAgg.push(tileSource[i]);
-            //var newObject = jQuery.extend({}, tileSource[i]);
-            //newObject.index = i * 2;
-            //tileAgg.push(newObject);
         }
-        //tileSource.forEach(function (tile) {
-        //    tile.
-        //    tileAgg.push(tile);
-        //});
-        //tileSource.forEach(function (tile) {
-        //    tileAgg.push(tile);
-        //});
         console.log(tileAgg);
         $scope.tiles = shuffle(tileAgg);
         console.log(tileAgg);
@@ -199,16 +189,27 @@
     var clickedTiles = [];
     $scope.matches = 0;
     $scope.turns = 0;
+    $scope.isDisabled = false;
 
     //Function corresponding to an item clicked on
     $scope.selection = function (choice) {
 
-        if (choice.img.length > 1) {
+        flip(choice, function() {
+            evaluate();
+        })
+    };
+
+    
+    function flip(choice, callback) {
+        if (choice.img.length > 1 && clickedTiles.length < 2) {
             choice.img.reverse();
             clickedCounter += 1;
             clickedTiles.push(choice);
         };
+        callback();
+    };
         
+    function evaluate() {
         setTimeout(function () {
             if (clickedCounter == 2 && clickedTiles[0].Name == clickedTiles[1].Name && clickedTiles[0].index != clickedTiles[1].index) {
                 clickedTiles[0].img.splice(1, 1);
@@ -216,11 +217,11 @@
                 clickedCounter = 0
                 clickedTiles = [];
                 $scope.matches += 1;
+                $scope.turns += 1;
+                $scope.$apply();
                 if ($scope.matches == 18) {
                     alert("Congratulations! It took you " + $scope.turns + " turns to win!");
                 };
-                console.log(matches);
-                $scope.turns += 1;
             }
             else if (clickedCounter == 2) {
                 clickedTiles[0].img.reverse();
@@ -228,12 +229,9 @@
                 clickedCounter = 0;
                 clickedTiles = [];
                 $scope.turns += 1;
+                $scope.$apply();
             }
-        }, 100);
-
-
-
-    }
-
+        }, 1000);
+    };
 
 });
