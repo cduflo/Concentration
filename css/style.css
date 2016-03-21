@@ -1,5 +1,7 @@
 body {
     background-color: azure;
+    background-image: url("../images/backdrop.png");
+    color: whitesmoke;
 }
 
 span {
